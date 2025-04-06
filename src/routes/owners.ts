@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { signUp, login } from '../controllers/ownersController'; // 👈 S mayúscula
+import { signUp, login } from '../controllers/ownersController'; 
 
 const router = Router();
 
