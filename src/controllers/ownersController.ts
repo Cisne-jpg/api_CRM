@@ -60,7 +60,15 @@ export const login: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    res.status(200).json({ message: "Login exitoso", user: { email: user.Email } });
+    // Respuesta corregida: incluye el OwnerID y otros datos útiles
+    res.status(200).json({ 
+      message: "Login exitoso",
+      user: {
+        email: user.Email,
+        OwnerID: user.OwnerID,  // Asegúrate de que coincida con el nombre de la columna en tu DB (puede ser Id, OwnerID, etc.)
+        name: user.Name    // Opcional: incluye más datos si los necesitas
+      }
+    });
   } catch (error: any) {
     console.error("Error en login:", error);
     res.status(500).json({ message: "Error en el servidor" });

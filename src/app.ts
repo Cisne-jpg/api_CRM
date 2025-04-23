@@ -1,20 +1,17 @@
 // src/app.ts
 import express from 'express';
 import cors from 'cors';
-import ownersRouter from './routes/owners'; // Asegúrate de que la ruta y extensión sean correctas
+import ownersRouter from './routes/owners';
+import kanbanRouter from './routes/kanban';
 
 const app = express();
 
-// Habilitar CORS (puedes configurarlo según tus necesidades)
 app.use(cors());
-
-// Middleware para parsear JSON
 app.use(express.json());
 
-// Montar las rutas
 app.use('/owners', ownersRouter);
+app.use('/kanban', kanbanRouter);
 
-// Ruta básica para pruebas
 app.get('/', (_req, res) => {
   res.send('API viva y coleando 🚀');
 });
