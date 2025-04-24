@@ -8,17 +8,20 @@ import { fetchOwnerProfile } from "../handlers/profileHandler";
 export const getProfile: RequestHandler = async (req, res) => {
   const id = parseInt(req.params.id, 10);
   if (isNaN(id)) {
-    return res.status(400).json({ message: "ID inválido" });
+    res.status(400).json({ message: "ID inválido" });
+    return;
   }
 
   try {
     const profile = await fetchOwnerProfile(id);
     if (!profile) {
-      return res.status(404).json({ message: "Owner no encontrado" });
+      res.status(404).json({ message: "Owner no encontrado" });
+      return;
     }
-    return res.status(200).json(profile);
-  } catch (err: any) {
+
+    res.status(200).json(profile);
+  } catch (err) {
     console.error("Error al obtener perfil:", err);
-    return res.status(500).json({ message: "Error interno del servidor" });
+    res.status(500).json({ message: "Error interno del servidor" });
   }
 };
