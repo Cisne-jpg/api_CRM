@@ -40,3 +40,11 @@ export const deleteKanbanItem = async (id: number): Promise<void> => {
     .input("id", id)
     .query(query);
 };
+
+export const updateKanbanItem = async (id: number, estado: string) => {
+  const pool = await getPool();
+  await pool.request()
+    .input("id", id)
+    .input("estado", estado)
+    .query("UPDATE kanban SET estado = @estado WHERE id = @id");
+};

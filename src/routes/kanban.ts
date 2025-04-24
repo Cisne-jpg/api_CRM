@@ -1,6 +1,6 @@
 // routes/kanban.ts
 import { Router } from "express";
-import { addKanbanItem, getKanbanItems, deleteKanbanItem } from "../controllers/kanbanController";
+import { addKanbanItem, getKanbanItems, deleteKanbanItem, updateKanbanItem } from "../controllers/kanbanController";
 
 const router = Router();
 
@@ -12,5 +12,7 @@ router.get("/:owner_id", getKanbanItems);
 
 // Ruta para eliminar un ítem del Kanban por su ID
 router.delete("/:id", deleteKanbanItem);
+
+router.patch("/:id", updateKanbanItem);
 
 export default router;

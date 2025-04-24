@@ -1,6 +1,6 @@
 // controllers/kanbanController.ts
 import { Request, Response } from "express";
-import { createKanbanItem, getKanbanItemsByOwner, deleteKanbanItem as deleteItem } from "../handlers/kanbanHandlers";
+import { createKanbanItem, getKanbanItemsByOwner, deleteKanbanItem as deleteItem, updateKanbanItem as updateItem } from "../handlers/kanbanHandlers";
 
 // Endpoint para crear un ítem en el Kanban
 export const addKanbanItem = async (req: Request, res: Response): Promise<void> => {
@@ -51,5 +51,23 @@ export const deleteKanbanItem = async (req: Request, res: Response): Promise<voi
   } catch (error) {
     console.error("Error en deleteKanbanItem:", error);
     res.status(500).json({ message: "Error al eliminar el ítem de Kanban" });
+  }
+};
+
+export const updateKanbanItem = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id = parseInt(req.params.id, 10);
+    const { estado } = req.body;
+
+    if (isNaN(id) || !estado) {
+      res.status(400).json({ message: "ID válido y campo 'estado' son requeridos" });
+      return;
+    }
+
+    await updateItem(id, estado);
+    res.sendStatus(204); // No content, la actualización fue exitosa
+  } catch (error) {
+    console.error("Error en updateKanbanItem:", error);
+    res.status(500).json({ message: "Error al actualizar el ítem de Kanban" });
   }
 };
