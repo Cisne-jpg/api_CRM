@@ -15,9 +15,12 @@ app.use(express.json());
 app.use('/owners', ownersRouter);
 app.use('/kanban', kanbanRouter);
 
-// Ruta de Contacts (une Contact con Organization)
+// Ruta de Contacts (une Contacts con Organizations)
 // Accesible en GET /api/contacts
 app.use('/api', contactsRoutes);
+
+// Ruta de perfil de owner
+// Accesible en GET /profile/:id
 app.use('/profile', profileRoutes);
 
 // Ruta raíz de prueba
