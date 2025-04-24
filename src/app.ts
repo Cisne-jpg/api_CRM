@@ -4,6 +4,7 @@ import cors from 'cors';
 import ownersRouter from './routes/owners';
 import kanbanRouter from './routes/kanban';
 import contactsRoutes from './routes/contacts';
+import profileRoutes from './routes/profile';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use('/kanban', kanbanRouter);
 // Ruta de Contacts (une Contact con Organization)
 // Accesible en GET /api/contacts
 app.use('/api', contactsRoutes);
+app.use('/profile', profileRoutes);
 
 // Ruta raíz de prueba
 app.get('/', (_req, res) => {
