@@ -15,6 +15,7 @@ export const getAllContactsWithOrg = async (): Promise<ContactWithOrg[]> => {
   const query = `
     SELECT
       c.ContactID,
+      c.Name,
       c.Email,
       c.FotoPerfil,
       c.OrganizationID,
