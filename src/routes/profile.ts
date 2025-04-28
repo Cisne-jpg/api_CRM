@@ -1,10 +1,11 @@
 import { Router } from "express";
 import { 
-    getProfile,
-    updateDescription,
-    addTag,
-    removeTag
-  } from "../controllers/profileController";
+  getProfile,
+  updateDescription,
+  addTag,
+  removeTag
+} from "../controllers/profileController";
+
 const router = Router();
 
 router.get("/:id", getProfile);
