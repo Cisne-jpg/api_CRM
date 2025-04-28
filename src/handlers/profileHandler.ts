@@ -10,6 +10,7 @@ export type OwnerProfile = {
   Etiquetas: string[];
 };
 
+// Obtener perfil
 export const fetchOwnerProfile = async (
   ownerId: number
 ): Promise<OwnerProfile | null> => {
@@ -55,6 +56,7 @@ export const updateOwnerDescription = async (
   const pool = await getPool();
   await pool
     .request()
+    
     .input("ownerId", ownerId)
     .input("description", description)
     .query(
