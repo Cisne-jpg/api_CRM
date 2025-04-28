@@ -56,7 +56,6 @@ export const updateOwnerDescription = async (
   const pool = await getPool();
   await pool
     .request()
-    
     .input("ownerId", ownerId)
     .input("description", description)
     .query(

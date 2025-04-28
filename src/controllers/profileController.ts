@@ -6,10 +6,7 @@ import {
   removeOwnerTag
 } from "../handlers/profileHandler";
 
-/**
- * GET /profile/:id
- * Devuelve datos públicos de perfil sin la contraseña
- */
+// GET /profile/:id
 export const getProfile: RequestHandler = async (req, res) => {
   try {
     const ownerId = parseInt(req.params.id, 10);
