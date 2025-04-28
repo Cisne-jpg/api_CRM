@@ -1,6 +1,6 @@
 // controllers/kanbanController.ts
 import { Request, Response } from "express";
-import { createKanbanItem, getKanbanItemsByOwner, deleteKanbanItem as deleteItem, updateKanbanItem as updateItem } from "../handlers/kanbanHandlers";
+import { createKanbanItem, getKanbanItemsByOwner, deleteKanbanItem as deleteItem, updateKanbanItem as updateItem, registerKanban } from "../handlers/kanbanHandlers";
 
 // Endpoint para crear un ítem en el Kanban
 export const addKanbanItem = async (req: Request, res: Response): Promise<void> => {
@@ -34,6 +34,23 @@ export const getKanbanItems = async (req: Request, res: Response): Promise<void>
   } catch (error) {
     console.error("Error en getKanbanItems:", error);
     res.status(500).json({ message: "Error al obtener los ítems de Kanban" });
+  }
+};
+
+export const stateCount = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const owner_id = parseInt(req.params.owner_id, 10);
+    const estado = req.params.estado;
+    if (isNaN(owner_id)) {
+      res.status(400).json({ message: "owner_id inválido" });
+      return;
+    }
+
+    const statec = await registerKanban(owner_id,estado);
+    res.status(200).json(statec);
+  } catch (error) {
+    console.error("Error en registerkanban:", error);
+    res.status(500).json({ message: "Error al reunir los estados" });
   }
 };
 
