@@ -8,8 +8,23 @@ import profileRoutes from './routes/profile';
 
 const app = express();
 
-app.use(cors());
+// Configuración de CORS para el front desplegado en Vercel
+const allowedOrigins = [
+  'https://reto-crm.vercel.app',
+  // 'https://<tu-preview-url>.vercel.app' // añade si usas preview deployments
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+
 app.use(express.json());
+
+// Preflight handler (maneja OPTIONS para todas las rutas)
+app.options('*', cors({ origin: allowedOrigins }));
 
 // Rutas de Owners y Kanban
 app.use('/owners', ownersRouter);
