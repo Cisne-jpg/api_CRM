@@ -1,11 +1,12 @@
-// index.ts
+// api/index.ts
 import dotenv from 'dotenv';
 dotenv.config();
 
-import app from './src/app';
+import app from './src/app'; // probablemente tu app está aquí
 
-const PORT = process.env.PORT || 3000;
+import { createServer } from 'http';
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+export default (req: any, res: any) => {
+  app(req, res);
+
+};

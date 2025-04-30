@@ -48,3 +48,16 @@ export const updateKanbanItem = async (id: number, estado: string) => {
     .input("estado", estado)
     .query("UPDATE kanban SET estado = @estado WHERE id = @id");
 };
+
+export const registerKanban = async (owner_id: number, estado: string): Promise<number> => {
+  const pool = await getPool();
+  const query = `SELECT count(*) as count FROM kanban WHERE owner_id = @owner_id and estado = @estado`;
+
+  const result = await pool.request()
+    .input("owner_id", owner_id)
+    .input("estado", estado)
+    .query(query);
+
+  // Devuelve solo el valor de 'count' (sin el objeto completo)
+  return result.recordset[0].count;
+};

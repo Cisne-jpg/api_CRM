@@ -29,18 +29,26 @@ app.options('*', cors({ origin: allowedOrigins }));
 // Rutas de Owners y Kanban
 app.use('/owners', ownersRouter);
 app.use('/kanban', kanbanRouter);
-
-// Ruta de Contacts (une Contacts con Organizations)
-// Accesible en GET /api/contacts
 app.use('/api', contactsRoutes);
-
-// Ruta de perfil de owner
-// Accesible en GET /profile/:id
 app.use('/profile', profileRoutes);
 
-// Ruta raíz de prueba
+
 app.get('/', (_req, res) => {
-  res.send('API viva y coleando 🚀');
+  res.send('API operativa 🚀');
+});
+
+app.use((_req, res) => {
+  res.status(404).json({ message: 'Ruta no encontrada' });
+});
+
+app.use((err: Error, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error('Error:', err.stack);
+  res.status(500).json({ message: 'Error interno del servidor' });
+});
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 export default app;
